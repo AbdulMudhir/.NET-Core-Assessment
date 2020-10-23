@@ -24,7 +24,7 @@ namespace _NET_Core_Assessment.Controllers
 
         }
 
-
+       //api/classes/
         [HttpPost]
         public async Task< IActionResult> CreateClass([FromBody] ClassPostModel classModel)
         {
@@ -41,20 +41,20 @@ namespace _NET_Core_Assessment.Controllers
 
                     var classID = await _classroomManager.AddClass(classToAdd);
 
-                    return Ok($"Class has been added to database - ID {classID}");
+                    return Ok($"Class has been added to database");
 
 
                 }
 
-                return Ok($"Class Already Exist - ClassID: {classDB.ClassId}");
+                return Ok($"Class Already Exist");
 
             }
 
             return NotFound();
         }
 
-
-        [HttpGet("GetAllStudentsByClassname")]
+        //api/classes/students?className
+        [HttpGet("students/{string}")]
         public async Task<IActionResult> GetAllStudentsByClassname(string className)
         {
            
@@ -76,8 +76,8 @@ namespace _NET_Core_Assessment.Controllers
 
         }
 
-
-        [HttpGet("GetAllClassRoomNames")]
+        //api/classes
+        [HttpGet]
         public async Task<IActionResult> GetAllClassRoomNames()
         {
             var data = await _classroomManager.GetAllClassesByName();

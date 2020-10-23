@@ -24,7 +24,8 @@ namespace _NET_Core_Assessment.Controllers
             
         }
 
-        [HttpPost("AddTeacher")]
+        //api/teacher
+        [HttpPost]
         public async Task <IActionResult> AddTeacher([FromBody] TeacherPostModel teacher)
         {
             if (ModelState.IsValid)
@@ -57,7 +58,8 @@ namespace _NET_Core_Assessment.Controllers
             return NotFound();
         }
 
-        [HttpPost("AddTeacherToClass")]
+        //api/teacher/class
+        [HttpPost("class")]
         public async Task<IActionResult> AddTeacherToClass(TeacherClassPostModel teacherClassPostModel)
         {
            
@@ -86,7 +88,7 @@ namespace _NET_Core_Assessment.Controllers
                     var updatedRow = await _teacherManager.AddTeacherIDByClassId
                         (teacherClassPostModel.TeacherId, teacherClassPostModel.ClassId);
 
-                    return Ok(updatedRow);  
+                    return Ok("Teacher has been added");  
                 }
 
                 return Ok("Teacher with that ID has already been assigned to the class");
