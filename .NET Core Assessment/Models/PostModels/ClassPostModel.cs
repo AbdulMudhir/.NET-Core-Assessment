@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace _NET_Core_Assessment.Models
 {
-    public class ClassModel
+    public class ClassPostModel
     {
-        public int ClassId { get; set; }
         public string ClassName { get; set; }
         public string School { get; set; }
         public string Grade { get; set; }

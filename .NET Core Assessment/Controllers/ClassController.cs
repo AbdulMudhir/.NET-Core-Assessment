@@ -10,17 +10,24 @@ namespace _NET_Core_Assessment.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClassesController : ControllerBase
+    public class ClassController : ControllerBase
     {
+        private readonly List<ClassModel> _dummyData;
 
-       [HttpGet]
-        public IActionResult Index()
+        public ClassController()
         {
-            return Ok();
+            _dummyData = new List<ClassModel>() {
+            new ClassModel() { ClassId = 1, ClassName= "ICT",School= "Hackney", Grade= "A+" },
+            new ClassModel() { ClassId = 2, ClassName = "SCIENCE", School = "Hackney", Grade = "A+" },
+            new ClassModel() { ClassId = 3, ClassName = "P.E", School = "Hackney", Grade = "A+" }
+
+            };
+
         }
 
+
         [HttpPost]
-        public IActionResult Create([FromBody] ClassModel classModel)
+        public IActionResult Create([FromBody] ClassPostModel classModel)
         {
             return Ok();
         }
@@ -34,7 +41,7 @@ namespace _NET_Core_Assessment.Controllers
         [HttpGet("GetAllClassRoomNames")]
         public IActionResult GetAllClassRoomNames()
         {
-            return Ok();
+            return new JsonResult( _dummyData.Select(d => d.ClassName));
         }
 
         [HttpGet("GetAllStudentsFromClassRoomId")]
