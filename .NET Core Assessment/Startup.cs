@@ -44,7 +44,10 @@ namespace _NET_Core_Assessment
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                     name: "Default",
+                     pattern: "{Controller}/{Action=Index}/{id?}"
+                     );
             });
         }
     }

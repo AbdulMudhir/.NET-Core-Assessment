@@ -13,6 +13,12 @@ namespace _NET_Core_Assessment.Controllers
     public class ClassesController : ControllerBase
     {
 
+       [HttpGet]
+        public IActionResult Index()
+        {
+            return Ok();
+        }
+
         [HttpPost]
         public IActionResult Create([FromBody] ClassModel classModel)
         {
@@ -25,14 +31,14 @@ namespace _NET_Core_Assessment.Controllers
             return Ok();
         }
 
-        [HttpGet]
+        [HttpGet("GetAllClassRoomNames")]
         public IActionResult GetAllClassRoomNames()
         {
             return Ok();
         }
 
-        [HttpGet]
-        public IActionResult GetAllStudentsFromClassRoomId()
+        [HttpGet("GetAllStudentsFromClassRoomId")]
+        public IActionResult GetAllStudentsFromClassRoomId(int classroomID)
         {
             return Ok();
         }

@@ -18,11 +18,11 @@ namespace _NET_Core_Assessment.Controllers
             return Ok();
         }
 
-        [HttpGet]
+        [HttpGet("AllStudentsFromClassById")]
         public IActionResult GetNamesAllStudentsFromClass()
         {
             return Ok();
         }
-
+   
     }
 }
