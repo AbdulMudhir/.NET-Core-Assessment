@@ -36,11 +36,12 @@ namespace _NET_Core_Assessment.DataAccessLibrary.DataAccess
         {
             using (IDbConnection connection = new SqlConnection(_connectionString))
             {
+
                 var classroomLookup = new Dictionary<int, FullClassroomModel>();
              
 
-                var data = await connection.QueryAsync< FullClassroomModel, PartialStudentModel, FullClassroomModel>(query,
-                    (classroom, student) => {
+                var data = await connection.QueryAsync<PartialStudentModel, FullClassroomModel, FullClassroomModel>(query,
+                    (student, classroom) => {
 
 
                         FullClassroomModel classroomEntry;
@@ -53,11 +54,13 @@ namespace _NET_Core_Assessment.DataAccessLibrary.DataAccess
 
                         }
 
+
+
                         classroomEntry.Students.Add(student);
 
 
                         return classroomEntry; 
-                    }, param);
+                    }, param:param,splitOn: "ClassId");
 
                 return data.Distinct().FirstOrDefault();
             }

@@ -44,10 +44,6 @@ namespace _NET_Core_Assessment.DataAccessLibrary.BusinessLogic
             return data.FirstOrDefault();
         }
 
-        //public async Task<PartialStudentModel> GetAllStudentsFromClassName(string classname)
-        //{
-        //    var query = "Select * From Classes c LEFT JOIN Students s ON c.ClassId = s.ClassId WHERE  ";
 
-        //}
     }
 }

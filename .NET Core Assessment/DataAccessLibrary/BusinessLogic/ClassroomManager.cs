@@ -36,6 +36,16 @@ namespace _NET_Core_Assessment.DataAccessLibrary.BusinessLogic
             return data.FirstOrDefault();
         }
 
+        public async Task<ClassModel> GetClassByName(string className)
+        {
+            var query = "Select * From Classes WHERE ClassName=@ClassName";
+
+            var data = await _dbAccess.GetData<ClassModel>
+                (query, new ClassModel { ClassName = className });
+
+            return data.FirstOrDefault();
+        }
+
 
         public async Task<int> AddClass(ClassModel classModel)
         {
@@ -67,7 +77,7 @@ namespace _NET_Core_Assessment.DataAccessLibrary.BusinessLogic
 
         public async Task<List<PartialStudentModel>> GetAllStudentsFromClassName(string classname)
         {
-            var query = "Select C.*, S.FirstName,S.LastName, From Classes AS C LEFT JOIN Students AS S ON s.ClassId = C.ClassID WHERE C.ClassName=@ClassName";
+            var query = "Select * From Students S LEFT JOIN Classes C ON S.ClassId = C.ClassID WHERE C.ClassName=@ClassName";
 
             var data = await _dbAccess.GetFullClassRoomData(query, new FullClassroomModel { ClassName = classname});
 

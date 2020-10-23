@@ -54,6 +54,29 @@ namespace _NET_Core_Assessment.Controllers
         }
 
 
+        [HttpGet("GetAllStudentsByClassname")]
+        public async Task<IActionResult> GetAllStudentsByClassname(string className)
+        {
+           
+                // check if the class already exist if it does , return class object or null
+                var classDB = await _classroomManager.GetClassByName(className);
+
+                if (classDB != null)
+                {
+                   
+                    var students = await _classroomManager.GetAllStudentsFromClassName(className);
+
+                    return Ok(students);
+
+
+                }
+
+                return NotFound("Classroom not found");
+
+
+        }
+
+
         [HttpGet("GetAllClassRoomNames")]
         public async Task<IActionResult> GetAllClassRoomNames()
         {
