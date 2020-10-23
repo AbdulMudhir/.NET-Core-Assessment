@@ -10,14 +10,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace _NET_Core_Assessment.Controllers
 {
-    [Route("api/class")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class ClassesController : ControllerBase
+    public class ClassController : ControllerBase
     {
 
         private readonly ClassroomManager _classroomManager;
 
-        public ClassesController(ClassroomManager classroomManager)
+        public ClassController(ClassroomManager classroomManager)
         {
             _classroomManager = classroomManager;
      
@@ -54,7 +54,7 @@ namespace _NET_Core_Assessment.Controllers
         }
 
         //api/classes/students?className
-        [HttpGet("students/{string}")]
+        [HttpGet("students")]
         public async Task<IActionResult> GetAllStudentsByClassname(string className)
         {
            
@@ -76,8 +76,8 @@ namespace _NET_Core_Assessment.Controllers
 
         }
 
-        //api/classes
-        [HttpGet]
+        //api/class/all
+        [HttpGet("all")]
         public async Task<IActionResult> GetAllClassRoomNames()
         {
             var data = await _classroomManager.GetAllClassesByName();

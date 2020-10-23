@@ -46,12 +46,12 @@ namespace _NET_Core_Assessment.Controllers
 
                     var teacherID = await _teacherManager.AddTeacher(teacherToAddDB);
 
-                    return Ok($"Teacher has been added to database - ID {teacherID}");
+                    return Ok($"Teacher has been added to database");
 
 
                 }
 
-                return Ok($"Teacher Already Exist - TeacherID: {teacherDB.TeacherId}");
+                return Ok($"Teacher Already Exist");
 
             }
 
@@ -88,7 +88,7 @@ namespace _NET_Core_Assessment.Controllers
                     var updatedRow = await _teacherManager.AddTeacherIDByClassId
                         (teacherClassPostModel.TeacherId, teacherClassPostModel.ClassId);
 
-                    return Ok("Teacher has been added");  
+                    return Ok("Teacher has been added assigned to the class");  
                 }
 
                 return Ok("Teacher with that ID has already been assigned to the class");
