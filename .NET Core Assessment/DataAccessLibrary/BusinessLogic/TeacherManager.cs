@@ -52,6 +52,21 @@ namespace _NET_Core_Assessment.DataAccessLibrary.BusinessLogic
             return data.FirstOrDefault();
         }
 
+        public async Task<int> AddTeacherIDByClassId(int teacherId, int classroomId)
+        {
+            // incase to prevent duplicates would validate all the properties 
+            var query = "INSERT INTO TeacherClasses (TeacherId, ClassId) VALUES (@TeacherId, @ClassId)";
+
+            var data = await _dbAccess.SaveDataAsync<TeacherClassesModel>
+                (query, new TeacherClassesModel
+                {
+                    TeacherId = teacherId,
+                    ClassId = classroomId
+                });
+
+            return data;
+        }
+
         public async Task<TeacherModel> GetTeacherById(int  teacherId)
         {
             // incase to prevent duplicates would validate all the properties 

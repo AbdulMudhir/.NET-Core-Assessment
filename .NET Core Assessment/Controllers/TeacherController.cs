@@ -56,7 +56,7 @@ namespace _NET_Core_Assessment.Controllers
             return NotFound();
         }
 
-        [HttpGet("AddTeacherToClass")]
+        [HttpPost("AddTeacherToClass")]
         public async Task<IActionResult> AddTeacherToClass(TeacherClassPostModel teacherClassPostModel)
         {
            
@@ -69,12 +69,31 @@ namespace _NET_Core_Assessment.Controllers
                     return NotFound("Teacher not found");
                 }
 
-                var classroom = 
+                var classroom = await _classroomManager.GetClassById(teacherClassPostModel.ClassId);
+
+                if(classroom == null)
+                {
+                    return NotFound("Classroom not found");
+                }
+
+                var teacherAssignedToClass =
+                   await  _teacherManager.GetTeacherIDByClassId(teacher.TeacherId, classroom.ClassId);
+
+                if(teacherAssignedToClass == null)
+                {
+                  
+                    var updatedRow = await _teacherManager.AddTeacherIDByClassId
+                        (teacherClassPostModel.TeacherId, teacherClassPostModel.ClassId);
+
+                    return Ok(updatedRow);  
+                }
+
+                return Ok("Teacher with that ID has already been assigned to the class");
 
             }
 
 
-            return new JsonResult(data);
+            return NotFound();
         }
 
 
