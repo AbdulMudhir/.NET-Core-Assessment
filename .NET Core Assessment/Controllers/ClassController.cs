@@ -31,9 +31,31 @@ namespace _NET_Core_Assessment.Controllers
 
 
         [HttpPost("CreateClass")]
-        public IActionResult CreateClass([FromBody] ClassPostModel classModel)
+        public async Task< IActionResult> CreateClass([FromBody] ClassPostModel classModel)
         {
-            return Ok();
+            if(ModelState.IsValid)
+            {
+                // check if the class already exist if it does , return class object or null
+                var classDB = await _classroomManager.GetClass(classModel);
+
+                if(classDB == null)
+                {
+                    var classToAdd = new ClassModel()
+                    { ClassName = classModel.ClassName, School = classModel.School = classModel.School,
+                        Grade = classModel.Grade };
+
+                    var classID = await _classroomManager.AddClass(classToAdd);
+
+                    return Ok($"Class has been added to database - ID {classID}");
+
+
+                }
+
+                return Ok($"Class Already Exist - ClassID: {classDB.ClassId}");
+
+            }
+
+            return NotFound();
         }
 
 

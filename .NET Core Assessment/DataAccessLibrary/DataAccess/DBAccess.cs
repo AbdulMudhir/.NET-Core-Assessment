@@ -31,6 +31,38 @@ namespace _NET_Core_Assessment.DataAccessLibrary.DataAccess
             }
         }
 
+        public  async Task<int> SaveDataAsync<T>(string query, T data)
+        {
+
+
+            using (IDbConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (var trans = connection.BeginTransaction())
+                {
+                    int index;
+
+                    try
+                    {
+                        index = await connection.ExecuteScalarAsync<int>(query, data, trans);
+
+
+                        trans.Commit();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine($"{e}");
+                        trans.Rollback();
+                        index = 0;
+                    }
+
+                    return index;
+                }
+
+
+            }
+        }
+
 
     }
 }

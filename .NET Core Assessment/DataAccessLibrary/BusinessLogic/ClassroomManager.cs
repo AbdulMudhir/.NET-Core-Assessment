@@ -17,6 +17,27 @@ namespace _NET_Core_Assessment.DataAccessLibrary.BusinessLogic
         }
 
 
+        public async Task<ClassModel> GetClass(ClassPostModel classPost)
+        {
+            var query = "Select * From Classes WHERE ClassName=@ClassName AND School =@School";
+
+            var data = await _dbAccess.GetData<ClassModel>
+                (query, new ClassModel { ClassName= classPost.ClassName, School= classPost.School });
+
+            return data.FirstOrDefault();
+        }
+
+      
+
+        public async Task<int> AddClass(ClassModel classModel)
+        {
+            var query = "INSERT INTO Classes (ClassName, School, Grade) OUTPUT INSERTED.ClassID VALUES (@ClassName, @School, @Grade)";
+
+            var data = await _dbAccess.SaveDataAsync<ClassModel>(query, classModel);
+
+            return data;
+        }
+
         public async Task<List<ClassModel>> GetAllClasses()
         {
             var query = "Select * From Classes";
