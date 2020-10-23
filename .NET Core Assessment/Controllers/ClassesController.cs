@@ -12,12 +12,12 @@ namespace _NET_Core_Assessment.Controllers
 {
     [Route("api/class")]
     [ApiController]
-    public class ClassController : ControllerBase
+    public class ClassesController : ControllerBase
     {
 
         private readonly ClassroomManager _classroomManager;
 
-        public ClassController(ClassroomManager classroomManager)
+        public ClassesController(ClassroomManager classroomManager)
         {
             _classroomManager = classroomManager;
      
@@ -25,7 +25,7 @@ namespace _NET_Core_Assessment.Controllers
         }
 
 
-        [HttpPost("CreateClass")]
+        [HttpPost]
         public async Task< IActionResult> CreateClass([FromBody] ClassPostModel classModel)
         {
             if(ModelState.IsValid)

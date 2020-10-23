@@ -21,7 +21,7 @@ namespace _NET_Core_Assessment.DataAccessLibrary.BusinessLogic
 
         public async Task<int> AddStudent(StudentModel student)
         {
-            var query = "INSERT INTO Student (FirstName, LastName, Age, ClassId) OUTPUT INSERTED.StudentId " +
+            var query = "INSERT INTO Students (FirstName, LastName, Age, ClassId) OUTPUT INSERTED.StudentId " +
                 "VALUES (@FirstName, @LastName, @Age, @ClassId)";
 
             return await _dbAccess.SaveDataAsync<StudentModel>(query, student);

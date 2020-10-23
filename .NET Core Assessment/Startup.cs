@@ -29,6 +29,7 @@ namespace _NET_Core_Assessment
         {
             services.AddControllers();
 
+            services.AddScoped<StudentManager>();
             services.AddScoped<TeacherManager>();
             services.AddScoped<ClassroomManager>();
             services.AddScoped<DBAccess>();
