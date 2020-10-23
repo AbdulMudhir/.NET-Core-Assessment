@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace _NET_Core_Assessment.Models
 {
-    public class FullClassroomModel:ClassModel
+    public class PartialStudentModel
     {
-       public List<PartialStudentModel> Students { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

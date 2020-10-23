@@ -65,5 +65,14 @@ namespace _NET_Core_Assessment.DataAccessLibrary.BusinessLogic
             return data.Select(c => c.ClassName).ToList();
         }
 
+        public async Task<List<PartialStudentModel>> GetAllStudentsFromClassName(string classname)
+        {
+            var query = "Select C.*, S.FirstName,S.LastName, From Classes AS C LEFT JOIN Students AS S ON s.ClassId = C.ClassID WHERE C.ClassName=@ClassName";
+
+            var data = await _dbAccess.GetFullClassRoomData(query, new FullClassroomModel { ClassName = classname});
+
+            return data.Students;
+        }
+
     }
 }

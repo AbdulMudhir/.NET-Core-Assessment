@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using _NET_Core_Assessment.Models;
+using Dapper;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,37 @@ namespace _NET_Core_Assessment.DataAccessLibrary.DataAccess
                 var data = await connection.QueryAsync<T>(query, param);
 
                 return data.ToList();
+            }
+        }
+
+        public async Task<FullClassroomModel> GetFullClassRoomData(string query, FullClassroomModel param)
+        {
+            using (IDbConnection connection = new SqlConnection(_connectionString))
+            {
+                var classroomLookup = new Dictionary<int, FullClassroomModel>();
+             
+
+                var data = await connection.QueryAsync< FullClassroomModel, PartialStudentModel, FullClassroomModel>(query,
+                    (classroom, student) => {
+
+
+                        FullClassroomModel classroomEntry;
+
+                        if(!classroomLookup.TryGetValue(classroom.ClassId, out classroomEntry))
+                        {
+                            classroomEntry = classroom;
+                            classroomEntry.Students = new List<PartialStudentModel>();
+                            classroomLookup.Add(classroomEntry.ClassId, classroomEntry);
+
+                        }
+
+                        classroomEntry.Students.Add(student);
+
+
+                        return classroomEntry; 
+                    }, param);
+
+                return data.Distinct().FirstOrDefault();
             }
         }
 
