@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _NET_Core_Assessment.DataAccessLibrary.BusinessLogic;
+using _NET_Core_Assessment.DataAccessLibrary.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +28,9 @@ namespace _NET_Core_Assessment
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddScoped<DBAccess>();
+            services.AddScoped<ClassroomManager>();
+           
             
         }
 

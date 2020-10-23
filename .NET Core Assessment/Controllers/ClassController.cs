@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _NET_Core_Assessment.DataAccessLibrary.BusinessLogic;
 using _NET_Core_Assessment.Models;
 using _NET_Core_Assessment.Models.PostModels;
 using Microsoft.AspNetCore.Http;
@@ -14,9 +15,11 @@ namespace _NET_Core_Assessment.Controllers
     public class ClassController : ControllerBase
     {
         private readonly List<ClassModel> _dummyData;
+        private readonly ClassroomManager _classroomManager;
 
-        public ClassController()
+        public ClassController(ClassroomManager classroomManager)
         {
+            _classroomManager = classroomManager;
             _dummyData = new List<ClassModel>() {
             new ClassModel() { ClassId = 1, ClassName= "ICT",School= "Hackney", Grade= "A+" },
             new ClassModel() { ClassId = 2, ClassName = "SCIENCE", School = "Hackney", Grade = "A+" },
@@ -27,28 +30,21 @@ namespace _NET_Core_Assessment.Controllers
         }
 
 
-        [HttpPost]
-        public IActionResult Create([FromBody] ClassPostModel classModel)
+        [HttpPost("CreateClass")]
+        public IActionResult CreateClass([FromBody] ClassPostModel classModel)
         {
             return Ok();
         }
 
-        [HttpPost("AddTeacher")]
-        public IActionResult AddTeacher([FromBody]TeacherPostModel teacher)
-        {
-            return Ok();
-        }
 
         [HttpGet("GetAllClassRoomNames")]
-        public IActionResult GetAllClassRoomNames()
+        public async Task<IActionResult> GetAllClassRoomNames()
         {
-            return new JsonResult( _dummyData.Select(d => d.ClassName));
+            var data = await _classroomManager.GetClasses();
+
+            return new JsonResult( data);
         }
 
-        [HttpGet("GetAllStudentsFromClassRoomId")]
-        public IActionResult GetAllStudentsFromClassRoomId(int classroomID)
-        {
-            return Ok();
-        }
+    
     }
 }
