@@ -17,7 +17,7 @@ namespace _NET_Core_Assessment.DataAccessLibrary.BusinessLogic
         }
 
 
-        public async Task<List<ClassModel>> GetClasses()
+        public async Task<List<ClassModel>> GetAllClasses()
         {
             var query = "Select * From Classes";
 
@@ -26,6 +26,15 @@ namespace _NET_Core_Assessment.DataAccessLibrary.BusinessLogic
             return data;
         }
 
-    
+
+        public async Task<List<string>> GetAllClassesByName()
+        {
+            var query = "Select ClassName From Classes";
+
+            var data = await _dbAccess.GetData<ClassModel>(query, null);
+
+            return data.Select(c => c.ClassName).ToList();
+        }
+
     }
 }

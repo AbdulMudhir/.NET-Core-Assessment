@@ -40,7 +40,7 @@ namespace _NET_Core_Assessment.Controllers
         [HttpGet("GetAllClassRoomNames")]
         public async Task<IActionResult> GetAllClassRoomNames()
         {
-            var data = await _classroomManager.GetClasses();
+            var data = await _classroomManager.GetAllClassesByName();
 
             return new JsonResult( data);
         }

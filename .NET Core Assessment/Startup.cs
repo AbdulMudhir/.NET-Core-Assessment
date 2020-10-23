@@ -28,10 +28,11 @@ namespace _NET_Core_Assessment
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<DBAccess>();
-            services.AddScoped<ClassroomManager>();
-           
             
+            services.AddScoped<ClassroomManager>();
+            services.AddScoped<DBAccess>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
