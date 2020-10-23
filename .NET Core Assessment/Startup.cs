@@ -47,7 +47,7 @@ namespace _NET_Core_Assessment
             {
                 endpoints.MapControllerRoute(
                      name: "Default",
-                     pattern: "{Controller}/{Action=Index}/{id?}"
+                     pattern: "{Controller}/{Action}/{id?}"
                      );
             });
         }

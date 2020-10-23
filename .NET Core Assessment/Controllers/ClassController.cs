@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using _NET_Core_Assessment.Models;
+using _NET_Core_Assessment.Models.PostModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace _NET_Core_Assessment.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/class")]
     [ApiController]
     public class ClassController : ControllerBase
     {
@@ -32,8 +33,8 @@ namespace _NET_Core_Assessment.Controllers
             return Ok();
         }
 
-        [HttpPost]
-        public IActionResult AddTeacher([FromBody] TeacherModel teacher)
+        [HttpPost("AddTeacher")]
+        public IActionResult AddTeacher([FromBody]TeacherPostModel teacher)
         {
             return Ok();
         }
