@@ -29,6 +29,7 @@ namespace _NET_Core_Assessment.Controllers
         {
             if (ModelState.IsValid)
             {
+              
                 // check if the teacher already exist if it does , return teacher object or null
                 var teacherDB = await _teacherManager.GetTeacher(teacher);
 
