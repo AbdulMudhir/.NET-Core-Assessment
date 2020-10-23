@@ -15,10 +15,13 @@ namespace _NET_Core_Assessment.Controllers
     public class TeacherController : ControllerBase
     {
         private readonly TeacherManager _teacherManager;
+        private readonly ClassroomManager _classroomManager;
 
-        public TeacherController(TeacherManager teacherManager)
+        public TeacherController(TeacherManager teacherManager, ClassroomManager classroomManager)
         {
             _teacherManager = teacherManager;
+            _classroomManager = classroomManager;
+            
         }
 
         [HttpPost("AddTeacher")]
@@ -53,6 +56,27 @@ namespace _NET_Core_Assessment.Controllers
             return NotFound();
         }
 
-   
+        [HttpGet("AddTeacherToClass")]
+        public async Task<IActionResult> AddTeacherToClass(TeacherClassPostModel teacherClassPostModel)
+        {
+           
+            if(ModelState.IsValid)
+            {
+                var teacher = await _teacherManager.GetTeacherById(teacherClassPostModel.TeacherId);
+
+                if(teacher == null)
+                {
+                    return NotFound("Teacher not found");
+                }
+
+                var classroom = 
+
+            }
+
+
+            return new JsonResult(data);
+        }
+
+
     }
 }

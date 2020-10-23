@@ -26,8 +26,16 @@ namespace _NET_Core_Assessment.DataAccessLibrary.BusinessLogic
 
             return data.FirstOrDefault();
         }
+        public async Task<ClassModel> GetClassById(int classId)
+        {
+            var query = "Select * From Classes WHERE ClassId=@ClassId";
 
-      
+            var data = await _dbAccess.GetData<ClassModel>
+                (query, new ClassModel { ClassId= classId });
+
+            return data.FirstOrDefault();
+        }
+
 
         public async Task<int> AddClass(ClassModel classModel)
         {

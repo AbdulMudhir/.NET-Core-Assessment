@@ -37,6 +37,34 @@ namespace _NET_Core_Assessment.DataAccessLibrary.BusinessLogic
             return data.FirstOrDefault();
         }
 
+        public async Task<TeacherClassesModel> GetTeacherIDByClassId(int teacherId, int classroomId)
+        {
+            // incase to prevent duplicates would validate all the properties 
+            var query = "Select * From TeacherClasses WHERE TeacherId=@TeacherId AND ClassId=@ClassId";
+
+            var data = await _dbAccess.GetData<TeacherClassesModel>
+                (query, new TeacherClassesModel
+                {
+                   TeacherId = teacherId,
+                   ClassId = classroomId
+                });
+
+            return data.FirstOrDefault();
+        }
+
+        public async Task<TeacherModel> GetTeacherById(int  teacherId)
+        {
+            // incase to prevent duplicates would validate all the properties 
+            var query = "Select * From Teacher WHERE TeacherId=@TeacherId";
+
+            var data = await _dbAccess.GetData<TeacherModel>
+                (query, new TeacherModel
+                {
+                    TeacherId = teacherId
+                });
+
+            return data.FirstOrDefault();
+        }
 
 
 
