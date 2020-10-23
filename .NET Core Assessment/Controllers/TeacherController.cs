@@ -21,8 +21,8 @@ namespace _NET_Core_Assessment.Controllers
             _teacherManager = teacherManager;
         }
 
-        [HttpPost("CreateTeacher")]
-        public async Task <IActionResult> CreateTeacher([FromBody] TeacherPostModel teacher)
+        [HttpPost("AddTeacher")]
+        public async Task <IActionResult> AddTeacher([FromBody] TeacherPostModel teacher)
         {
             if (ModelState.IsValid)
             {
