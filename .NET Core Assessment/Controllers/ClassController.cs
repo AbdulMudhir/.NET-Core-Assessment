@@ -14,18 +14,13 @@ namespace _NET_Core_Assessment.Controllers
     [ApiController]
     public class ClassController : ControllerBase
     {
-        private readonly List<ClassModel> _dummyData;
+
         private readonly ClassroomManager _classroomManager;
 
         public ClassController(ClassroomManager classroomManager)
         {
             _classroomManager = classroomManager;
-            _dummyData = new List<ClassModel>() {
-            new ClassModel() { ClassId = 1, ClassName= "ICT",School= "Hackney", Grade= "A+" },
-            new ClassModel() { ClassId = 2, ClassName = "SCIENCE", School = "Hackney", Grade = "A+" },
-            new ClassModel() { ClassId = 3, ClassName = "P.E", School = "Hackney", Grade = "A+" }
-
-            };
+     
 
         }
 
